@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://spring.png" type="Texture" id=1]
+[ext_resource path="res://sphere.png" type="Texture" id=2]
+[ext_resource path="res://hook.png" type="Texture" id=3]
+[ext_resource path="res://hook.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.04942
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0.223529, 0.32549, 0.345098, 1 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_scale = Vector2( 1.04844, 1.07054 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="hook" type="Sprite" parent="."]
+modulate = Color( 0.988235, 0.988235, 0.992157, 1 )
+position = Vector2( 897.469, 467.225 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="spring" type="Sprite" parent="hook"]
+scale = Vector2( 2.25554, 1.68412 )
+texture = ExtResource( 1 )
+offset = Vector2( 140, 0 )
+
+[node name="ball" type="Sprite" parent="hook"]
+modulate = Color( 0.509804, 0.529412, 0.101961, 1 )
+self_modulate = Color( 0.576471, 0.431373, 0.431373, 1 )
+position = Vector2( 650, 0 )
+scale = Vector2( 2.25554, 2.3787 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Area2D" type="Area2D" parent="hook/ball"]
+scale = Vector2( 0.443353, 0.420397 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hook/ball/Area2D"]
+scale = Vector2( 8.24905, 8.75027 )
+shape = SubResource( 1 )
+[connection signal="input_event" from="hook/ball/Area2D" to="hook" method="_on_Area2D_input_event"]
